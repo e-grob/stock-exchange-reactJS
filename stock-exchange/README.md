@@ -4,7 +4,11 @@ Access an API key from Financial Modeling Prep: https://financialmodelingprep.co
 
 find .env file outside src folder and input API like so: REACT_APP_STOCK_EXCHANGE_API_KEY = "your API key"
 
-in terminal cd into react app stock-exchange-reactJS stock-exchange folder run npm start
+in terminal cd into react app stock-exchange-reactJS stock-exchange folder
+
+run npm install
+
+run npm start
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

@@ -1,7 +1,6 @@
 import React from "react";
 import { getCompanyHistory } from "../lib/api.js";
 import Chart from "./Chart";
-import { grabStocksFromApi, getStockDetails } from "../lib/api.js";
 import "../css/companyChart.css";
 
 class CompanyPage extends React.Component {

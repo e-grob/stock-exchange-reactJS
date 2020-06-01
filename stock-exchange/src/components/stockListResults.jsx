@@ -15,7 +15,11 @@ class StockListResults extends React.Component {
           <li className="list-item" key={index}>
             <div className="parent-div d-flex flex-row justify-content-between">
               <div className="right-div-parent">
-                <img className="company-logo" src={company.details.image}></img>
+                <img
+                  className="company-logo"
+                  src={company.details.image}
+                  alt={company.name}
+                ></img>
                 <Link
                   className="link-to-company"
                   to={`./company/${company.symbol}`}
