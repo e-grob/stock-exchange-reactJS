@@ -13,7 +13,6 @@ class CompanyPage extends React.Component {
       display: false,
       stockList: [],
     };
-    this.handleFetchOnEmptyStocks = this.handleFetchOnEmptyStocks.bind(this);
   }
 
   async componentDidMount() {
