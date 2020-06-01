@@ -16,27 +16,11 @@ class CompanyPage extends React.Component {
     this.handleFetchOnEmptyStocks = this.handleFetchOnEmptyStocks.bind(this);
   }
 
-  async handleFetchOnEmptyStocks() {
-    const { stocks } = this.props;
-    console.log(stocks);
-    //let listOfCompanyStocks = await grabStocksFromApi(searchInput);
-    // for (let individualCompany of stocks) {
-    //   await getStockDetails(individualCompany);
-    // }
-    // this.setState({ stockList: stocks });
-    // console.log(this.state.stockList);
-    //this.props.stocksFromSearch(listOfCompanyStocks);
-  }
   async componentDidMount() {
     console.log(this.props.stocks);
     let path = window.location.pathname;
     let pathArray = path.split("/");
     let companySymbol = pathArray[pathArray.length - 1];
-
-    if (!this.props.stocks) {
-      console.log("empty");
-      this.handleFetchOnEmptyStocks(companySymbol);
-    }
 
     const historicalDataObject = await getCompanyHistory(companySymbol);
     this.setState({ historicalData: historicalDataObject });
