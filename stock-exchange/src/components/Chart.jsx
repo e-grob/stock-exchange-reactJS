@@ -1,7 +1,6 @@
 import React from "react";
 import Plot from "react-plotly.js";
 import "../css/companyChart.css";
-import ScatterMarkerLine from "plotly.js";
 
 class Chart extends React.Component {
   constructor(props) {
@@ -12,7 +11,6 @@ class Chart extends React.Component {
     };
   }
   componentDidMount() {
-    const { stockChartXValues, stockChartYValues } = this.state;
     const { historicalData } = this.props;
     console.log("histData:", historicalData);
 
@@ -30,8 +28,12 @@ class Chart extends React.Component {
   }
 
   render() {
+    const { companyPercentage } = this.props;
+    let percentAsNum = companyPercentage.replace(/^[%()+ ]+|[%()+ ]+$/g, "");
+    percentAsNum = Number(percentAsNum);
+
     return (
-      <div>
+      <div className="line-chart">
         <Plot
           data={[
             {
@@ -39,15 +41,23 @@ class Chart extends React.Component {
               y: this.state.stockChartYValues,
               type: "scatter",
               mode: "lines+markers",
-              // marker: (color:'green')
+              marker:
+                percentAsNum >= 0 ? { color: "#30a730" } : { color: "red" },
             },
           ]}
-          layout={{ width: 700, height: 450, title: "--" }}
+          config={{ responsive: true, modeBar: false }}
+          layout={{
+            xaxis: {
+              title: "Last 30 Days",
+              size: 12,
+            },
+            width: 700,
+            height: 500,
+            title: "Historical Data",
+            display: "flex",
+          }}
         />
       </div>
-      //     <p>x-valus: {this.state.stockChartXValues}</p>
-      //     <p>y-valus: {this.state.stockChartYValues}</p>
-      //   </div>
     );
   }
 }

@@ -1,0 +1,32 @@
+.title {
+  text-align: center;
+  padding-top: 2%;
+}
+.company-logo {
+  width: 30px;
+  height: auto;
+  margin-left: -38px;
+  padding-right: 6px;
+}
+.list {
+  list-style-type: none;
+}
+a:hover {
+  text-decoration: none;
+}
+.company-name {
+  padding: 0 4px;
+}
+
+.company-symbol {
+  color: black;
+}
+.green-color {
+  color: rgb(48, 167, 48);
+}
+.red-color {
+  color: rgb(189, 20, 20);
+}
+.grey-color {
+  color: rgb(119, 115, 115);
+}

@@ -1,39 +1,53 @@
 import React from "react";
 import { getCompanyHistory } from "../lib/api.js";
 import Chart from "./Chart";
+import { grabStocksFromApi, getStockDetails } from "../lib/api.js";
 import "../css/companyChart.css";
 
 class CompanyPage extends React.Component {
-  //_isMounted = false;
-
   constructor(props) {
     super(props);
-    this.state = { historicalData: [], company: [], display: false };
+    this.state = {
+      historicalData: [],
+      company: [],
+      display: false,
+      stockList: [],
+    };
+    this.handleFetchOnEmptyStocks = this.handleFetchOnEmptyStocks.bind(this);
   }
 
+  async handleFetchOnEmptyStocks() {
+    const { stocks } = this.props;
+    console.log(stocks);
+    //let listOfCompanyStocks = await grabStocksFromApi(searchInput);
+    // for (let individualCompany of stocks) {
+    //   await getStockDetails(individualCompany);
+    // }
+    // this.setState({ stockList: stocks });
+    // console.log(this.state.stockList);
+    //this.props.stocksFromSearch(listOfCompanyStocks);
+  }
   async componentDidMount() {
-    //this._isMounted = true;
-
+    console.log(this.props.stocks);
     let path = window.location.pathname;
     let pathArray = path.split("/");
     let companySymbol = pathArray[pathArray.length - 1];
-    // console.log(companySymbol);
+
+    if (!this.props.stocks) {
+      console.log("empty");
+      this.handleFetchOnEmptyStocks(companySymbol);
+    }
+
     const historicalDataObject = await getCompanyHistory(companySymbol);
-    // if (this._isMounted) {
     this.setState({ historicalData: historicalDataObject });
-    // }
-    // console.log(this.state.historicalData);
 
     for (let i = 0; i < this.props.stocks.length; i++) {
       if (this.props.stocks[i].symbol === companySymbol) {
-        // if (this._isMounted) {
         this.setState({ company: this.props.stocks[i] }, () => {
           this.setState({ display: true });
         });
-        // }
       }
     }
-    // console.log(this.state.company);
   }
 
   render() {
@@ -42,7 +56,7 @@ class CompanyPage extends React.Component {
       <div className="company-page">
         {display && (
           <div className="parent-div">
-            <div className="company-pg-header">
+            <div className="company-pg-header d-flex justify-content-start">
               <div className="img-div">
                 <img
                   className="img-responsive"
@@ -50,7 +64,7 @@ class CompanyPage extends React.Component {
                   alt={company.symbol}
                 />
               </div>
-              <div className="company-page-name">
+              <div className="title-div">
                 <h1 className="company-page-title">{company.name}</h1>
               </div>
             </div>
@@ -59,18 +73,31 @@ class CompanyPage extends React.Component {
                 Stock Price: ${company.details.price}{" "}
               </span>
               &nbsp;
-              <span className="percent-changes">
-                {company.details.changesPercentage}
-              </span>
-            </div>
-            <Chart
-              className="line-chart"
-              historicalData={historicalData}
-            ></Chart>
+              {company.details.changesPercentage.includes("+") && (
+                <span className="green-color">
+                  {company.details.changesPercentage}
+                </span>
+              )}
+              {company.details.changesPercentage.includes("-") && (
+                <span className="red-color">
+                  {company.details.changesPercentage}
+                </span>
+              )}
+              {company.details.changesPercentage === "(0.00%)" && (
+                <span className="grey-color">
+                  {company.details.changesPercentage}
+                </span>
+              )}
+            </div>{" "}
             <div className="company-description container">
               <h2>About</h2>
               {company.details.description}
             </div>
+            <Chart
+              class="chart"
+              historicalData={historicalData}
+              companyPercentage={company.details.changesPercentage}
+            ></Chart>
             <div className="company-website container">
               <a href={company.details.website}>{company.details.website}</a>
             </div>

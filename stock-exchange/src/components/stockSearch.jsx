@@ -3,7 +3,6 @@ import StockListResults from "./stockListResults";
 import { grabStocksFromApi, getStockDetails } from "../lib/api.js";
 import Marquee from "./marquee";
 import "../css/stockListDisplay.css";
-// import CompanyPage from "./company";
 
 class StockSearch extends React.Component {
   constructor(props) {
@@ -23,7 +22,6 @@ class StockSearch extends React.Component {
       await getStockDetails(individualCompany);
     }
 
-    //console.log(listOfCompanyStocks);
     this.setState({ stockList: listOfCompanyStocks, loader: false });
     this.props.stocksFromSearch(listOfCompanyStocks);
   }

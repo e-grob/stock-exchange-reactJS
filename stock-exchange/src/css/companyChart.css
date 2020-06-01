@@ -1,0 +1,48 @@
+body {
+  width: 100vw;
+  height: 100vh;
+}
+.company-pg-header {
+}
+.img-div {
+  width: 12%;
+  height: auto;
+  margin-top: 2%;
+  margin-left: 2%;
+  padding-right: 1%;
+}
+
+.company-page-title {
+  margin-top: 50px;
+  text-align: center;
+
+  font-size: 50px;
+}
+.price-and-changes {
+  margin-top: 60px;
+  font-size: 30px;
+}
+.line-chart {
+  text-align: center;
+  margin-top: 40px;
+}
+.company-website {
+  padding-bottom: 5%;
+}
+
+@media only screen and (max-width: 600px) {
+  .title-div {
+    width: 100%;
+  }
+  .company-page-title {
+    font-size: 30px;
+    margin-left: 80px;
+    margin-top: 10px;
+  }
+  .price-and-changes {
+    font-size: 15px;
+  }
+  .line-chart {
+    text-align: start;
+  }
+}

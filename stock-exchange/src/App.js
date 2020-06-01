@@ -12,7 +12,6 @@ class App extends React.Component {
 
   retrieveStockList = (stocksFromSearch) => {
     this.setState({ stockList: stocksFromSearch });
-    // console.log(this.state.stockList);
   };
 
   render() {
@@ -37,8 +36,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-//require('.env').config()
-//process.env.MY_API_KEY
-
-// state = { stockList: [] };
